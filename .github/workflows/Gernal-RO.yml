@@ -19,7 +19,7 @@ jobs:
           filename: general_RO.svg
           token: ${{ secrets.METRICS_TOKEN }}
           base: ""
-          committer_gist: ${{ secrets.GIST }}
+          committer_gist: af59f69a1253f5f539be19dcc7782430
           config_timezone: Asia/Taipei
           config_order: code, activity
           output_action: gist
