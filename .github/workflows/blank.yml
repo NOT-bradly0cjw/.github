@@ -1,39 +1,36 @@
-name: Metrics
+# Visit https://github.com/lowlighter/metrics#-documentation for full reference
+name: Gernal-LO
 on:
   # Schedule daily updates
-  schedule: [{cron: "0 * * * *"}]
+  schedule: [{cron: "20 * * * *"}]
   # (optional) Run workflow manually
   workflow_dispatch:
   # (optional) Run workflow when pushing on master/main
-  push: {branches: ["master", "main"]}
+  # push: {branches: ["master", "main"]}
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    steps:
-      - uses: lowlighter/metrics@latest
+    steps:         
+      - name: Gernal L-O
+        uses: lowlighter/metrics@latest
         with:
+          filename: general_LO.svg
           token: ${{ secrets.METRICS_TOKEN }}
+          committer_gist: ${{ secrets.GIST }}
+          output_action: gist
+          repositories_forks: yes
+          # Options
           user: NTTUCSIE-111
           template: classic
           base: header, activity, community, repositories, metadata
           base_indepth: yes
-          config_display: columns
           config_timezone: Asia/Taipei
-          plugin_activity: yes
-          plugin_activity_days: 14
-          plugin_activity_filter: all
-          plugin_activity_limit: 5
-          plugin_activity_load: 300
-          plugin_activity_timestamps: yes
-          plugin_activity_visibility: all
-          users_ignored: github-actions[bot], dependabot[bot], dependabot-preview[bot], actions-user, action@github.com
-          plugin_code: yes
-          plugin_code_days: 3
-          plugin_code_lines: 12
-          plugin_code_load: 400
-          plugin_code_visibility: public
+          config_order: base.header, introduction, base.activity+community, base.repositories, lines, language, habbit , base.metadata
+          repositories_affiliations: organization_member
+          plugin_introduction: yes
+          plugin_introduction_title: yes
           plugin_habits: yes
           plugin_habits_charts: yes
           plugin_habits_charts_type: classic
@@ -50,7 +47,7 @@ jobs:
           plugin_languages_indepth: yes
           plugin_languages_limit: 8
           plugin_languages_recent_categories: markup, programming
-          plugin_languages_recent_days: 14
+          plugin_languages_recent_days: 365
           plugin_languages_recent_load: 300
           plugin_languages_sections: most-used
           plugin_languages_threshold: 0%
@@ -59,21 +56,19 @@ jobs:
           plugin_lines_repositories_limit: 4
           plugin_lines_sections: base
           plugin_traffic: yes
-          repositories_forks: yes
-          output_action: none
           
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
           
-      - name: out
-        run: |
-          set +e
-          git checkout metrics-renders
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          sudo mv /metrics_renders/* ./
-          git add --all
-          git commit -m "chore: push metrics"
-          git push
+#       - name: out
+#         run: |
+#           set +e
+#           git checkout metrics-renders
+#           git config user.name github-actions[bot]
+#           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+#           sudo mv /metrics_renders/* ./
+#           git add --all
+#           git commit -m "chore: push metrics"
+#           git push
