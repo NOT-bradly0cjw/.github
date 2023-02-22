@@ -18,8 +18,7 @@ jobs:
         with:
           filename: general_LO.svg
           token: ${{ secrets.METRICS_TOKEN }}
-          committer_gist: ${{ secrets.GIST }}
-          output_action: gist
+          
           repositories_forks: yes
           # Options
           user: NTTUCSIE-111
